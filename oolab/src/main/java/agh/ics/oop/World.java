@@ -2,18 +2,13 @@ package agh.ics.oop;
 
 public class World {
     public static void run(String[] args){
-        System.out.println("Zwierzak idzie do przodu");
-        String wynik ="";
-        int dlugosc = args.length;
-        int obecnaDlugosc = 0;
-        for(String arg : args) {
-            obecnaDlugosc += 1;
-            if (dlugosc == obecnaDlugosc){
-                wynik = wynik + arg;
-            }
-            else {
-                wynik = wynik + arg + ", ";
-            }
+        for (String arg : args){
+           switch (arg) {
+                case "f" -> System.out.println("zwierzak idzie do przodu");
+                case "b" -> System.out.println("zwierzak idzie do tyłu");
+                case "l" -> System.out.println("zwierzak skręca w lewo");
+                case "r" -> System.out.println("zwierzak skręca w prawo");
+           }
         }
 
     }
