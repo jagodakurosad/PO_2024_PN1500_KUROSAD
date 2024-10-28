@@ -23,7 +23,7 @@ public class Vector2d {
     }
     @Override
     public String toString(){
-        return "("+ x + ", "+y+")";
+        return "("+ x + ", "+ y +")";
     }
 
     public boolean precedes(Vector2d other){
@@ -52,16 +52,16 @@ public class Vector2d {
         return new Vector2d(min(this.x, other.x), min(this.y, other.y));
     }
 
-    Vector2d opposite (Vector2d other) {
+    Vector2d opposite() {
         return new Vector2d(-this.x , -this.y);
     }
 
     @Override
     public boolean equals(Object other) {
         if (this == other) return true;
-        if (other == null || getClass() != other.getClass()) return false;
-        Vector2d vector2d = (Vector2d) other;
-        return x == vector2d.x && y == vector2d.y;
+        if (!(other instanceof Vector2d)) return false;
+        Vector2d myVector2d = (Vector2d) other;
+        return x == myVector2d.x && y == myVector2d.y;
     }
 
     @Override

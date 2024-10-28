@@ -30,12 +30,12 @@ public class World {
 //        System.out.println(position2);
 //        System.out.println(position1.add(position2));
 
-        MapDirection direction = MapDirection.SOUTH;
-        Vector2d unitVector = direction.toUnitVector();
-        System.out.println("test metody toString() dla SOUTH: " + direction);
-        System.out.println("test metody next() dla SOUTH: " + direction.next());
-        System.out.println("test metody previous() dla SOUTH: " + direction.previous());
-        System.out.println("test metody toUnitVector() dla SOUTH: " + unitVector);
+//        MapDirection direction = MapDirection.SOUTH;
+//        Vector2d unitVector = direction.toUnitVector();
+//        System.out.println("test metody toString() dla SOUTH: " + direction);
+//        System.out.println("test metody next() dla SOUTH: " + direction.next());
+//        System.out.println("test metody previous() dla SOUTH: " + direction.previous());
+//        System.out.println("test metody toUnitVector() dla SOUTH: " + unitVector);
 
     }
 }
