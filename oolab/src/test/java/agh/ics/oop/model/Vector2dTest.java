@@ -18,11 +18,17 @@ class Vector2dTest {
         Vector2d vector5 = new Vector2d(0,0);
         Vector2d vector6 = new Vector2d(-5,-6);
         Vector2d vector7 = new Vector2d(-5,-6);
+        Vector2d vector8 = new Vector2d(-4,3);
+        Vector2d vector9 = new Vector2d(-4,3);
+
         //then
-        assertEquals(vector2, vector3);
-        assertNotEquals(vector1, vector3);
-        assertEquals(vector5,vector4);
-        assertEquals(vector6,vector7);
+        assertFalse(vector1.equals(vector2));
+        assertFalse(vector1.equals(vector8));
+
+        assertTrue(vector2.equals(vector3));
+        assertTrue(vector4.equals(vector5));
+        assertTrue(vector6.equals(vector7));
+        assertTrue(vector8.equals(vector9));
 
     }
 
@@ -97,9 +103,9 @@ class Vector2dTest {
         Vector2d upperRightVector1And3 = vector1.upperRight(vector3);
         Vector2d upperRightVector1And4 = vector1.upperRight(vector4);
         //then
-        assertEquals(upperRightVector1And2, new Vector2d(2,3));
-        assertEquals(upperRightVector1And3, new Vector2d(1,3));
-        assertEquals(upperRightVector1And4, new Vector2d(1,3));
+        assertEquals(new Vector2d(2,3), upperRightVector1And2);
+        assertEquals(new Vector2d(1,3), upperRightVector1And3);
+        assertEquals(new Vector2d(1,3), upperRightVector1And4);
 
     }
 
@@ -115,9 +121,9 @@ class Vector2dTest {
         Vector2d lowerLeftVector1And3 = vector1.lowerLeft(vector3);
         Vector2d lowerLeftVector1And4 = vector1.lowerLeft(vector4);
         //then
-        assertEquals(lowerLeftVector1And2, new Vector2d(1,-1));
-        assertEquals(lowerLeftVector1And3, new Vector2d(0,0));
-        assertEquals(lowerLeftVector1And4, new Vector2d(-4,-1));
+        assertEquals(new Vector2d(1,-1), lowerLeftVector1And2);
+        assertEquals(new Vector2d(0,0),lowerLeftVector1And3);
+        assertEquals(new Vector2d(-4,-1), lowerLeftVector1And4);
 
     }
 
@@ -134,11 +140,11 @@ class Vector2dTest {
         Vector2d vector3Opposite = vector3.opposite();
         Vector2d vector4Opposite = vector4.opposite();
         //then
-        assertEquals(vector1Opposite, new Vector2d(-1,-3));
-        assertEquals(vector2Opposite, new Vector2d(2,1));
-        assertEquals(vector3Opposite, new Vector2d(0,0));
-        assertEquals(vector4Opposite, new Vector2d(1, -5));
-        assertNotEquals(vector1Opposite, new Vector2d(-1,3));
+        assertEquals(new Vector2d(-1,-3), vector1Opposite);
+        assertEquals(new Vector2d(2,1), vector2Opposite);
+        assertEquals(new Vector2d(0,0), vector3Opposite);
+        assertEquals(new Vector2d(1, -5), vector4Opposite);
+        assertNotEquals(new Vector2d(-1,3), vector1Opposite);
     }
 
     @Test
@@ -150,10 +156,10 @@ class Vector2dTest {
         Vector2d vector4 = new Vector2d(-1,5);
 
         //then
-        assertEquals(vector1.add(vector2),new Vector2d(-1,2));
-        assertEquals(vector1.add(vector3),new Vector2d(1,3));
-        assertEquals(vector1.add(vector4),new Vector2d(0,8));
-        assertEquals(vector2.add(vector2),new Vector2d (-4,-2));
+        assertEquals(new Vector2d(-1,2), vector1.add(vector2));
+        assertEquals(new Vector2d(1,3), vector1.add(vector3));
+        assertEquals(new Vector2d(0,8), vector1.add(vector4));
+        assertEquals(new Vector2d (-4,-2), vector2.add(vector2));
     }
 
     @Test
@@ -165,10 +171,10 @@ class Vector2dTest {
         Vector2d vector4 = new Vector2d(-1,5);
 
         //then
-        assertEquals(vector1.subtract(vector2),new Vector2d(3,4));
-        assertEquals(vector1.subtract(vector3),new Vector2d(1,3));
-        assertEquals(vector1.subtract(vector4),new Vector2d(2,-2));
-        assertEquals(vector2.subtract(vector2),new Vector2d (0,0));
+        assertEquals(new Vector2d(3,4), vector1.subtract(vector2));
+        assertEquals(new Vector2d(1,3), vector1.subtract(vector3));
+        assertEquals(new Vector2d(2,-2),vector1.subtract(vector4));
+        assertEquals(new Vector2d (0,0), vector2.subtract(vector2));
     }
 
 }
