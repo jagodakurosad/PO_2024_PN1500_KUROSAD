@@ -15,6 +15,7 @@ public class Vector2d {
     }
 
     public int getX() {
+
         return x;
     }
     public int getY() {
@@ -23,7 +24,7 @@ public class Vector2d {
     }
     @Override
     public String toString(){
-        return "("+ x + ", "+ y +")";
+        return "(%s, %s)".formatted(x,y);
     }
 
     public boolean precedes(Vector2d other){
