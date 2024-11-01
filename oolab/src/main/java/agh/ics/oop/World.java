@@ -1,5 +1,6 @@
 package agh.ics.oop;
 
+import agh.ics.oop.model.Animal;
 import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
@@ -36,6 +37,9 @@ public class World {
 //        System.out.println("test metody next() dla SOUTH: " + direction.next());
 //        System.out.println("test metody previous() dla SOUTH: " + direction.previous());
 //        System.out.println("test metody toUnitVector() dla SOUTH: " + unitVector);
+
+        Animal myAnimal = new Animal();
+        System.out.println(myAnimal.toString());
 
     }
 }
