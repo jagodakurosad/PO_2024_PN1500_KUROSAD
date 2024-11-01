@@ -21,4 +21,23 @@ public class Animal {
         return this.positionOnMap.equals(currentPosition);
     }
 
+    void move (MoveDirection direction) {
+
+        Vector2d myNextPosition;
+
+        if (direction == MoveDirection.RIGHT) {
+            this.myDirection = myDirection.next();
+        }
+        if (direction == MoveDirection.LEFT) {
+            this.myDirection = myDirection.previous();
+        }
+        if (direction == MoveDirection.FORWARD) {
+            myNextPosition = this.positionOnMap.add(myDirection.toUnitVector());
+        } else {
+            myNextPosition = this.positionOnMap.add((myDirection.toUnitVector()).opposite());
+        }
+        if (myNextPosition.getX() >= 0 && myNextPosition.getX() <= 4 && myNextPosition.getY() >= 0 && myNextPosition.getY() <= 4) {
+            this.positionOnMap = myNextPosition;
+        }
+    }
 }
