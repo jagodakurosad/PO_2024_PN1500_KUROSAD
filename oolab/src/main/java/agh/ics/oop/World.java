@@ -5,6 +5,8 @@ import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 
+import java.util.List;
+
 import static agh.ics.oop.OptionsParser.parse;
 
 public class World {
@@ -20,26 +22,14 @@ public class World {
 
     }
     public static void main(String[] args) {
-//        MoveDirection[] result = parse(args);
-//        System.out.println("System wystartował");
-//        run(result);
-//        System.out.println("System zakończył działanie");
 
-//        Vector2d position1 = new Vector2d(1,2);
-//        System.out.println(position1);
-//        Vector2d position2 = new Vector2d(-2,1);
-//        System.out.println(position2);
-//        System.out.println(position1.add(position2));
+//        Animal myAnimal = new Animal();
+//        System.out.println(myAnimal.toString());
 
-//        MapDirection direction = MapDirection.SOUTH;
-//        Vector2d unitVector = direction.toUnitVector();
-//        System.out.println("test metody toString() dla SOUTH: " + direction);
-//        System.out.println("test metody next() dla SOUTH: " + direction.next());
-//        System.out.println("test metody previous() dla SOUTH: " + direction.previous());
-//        System.out.println("test metody toUnitVector() dla SOUTH: " + unitVector);
-
-        Animal myAnimal = new Animal();
-        System.out.println(myAnimal.toString());
+        List<MoveDirection> directions = OptionsParser.parse(new String[]{"f","b", "r", "l","f","f", "r", "r", "f", "f", "f", "f", "f", "f", "f","f"});
+        List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
+        Simulation simulation = new Simulation(positions, directions);
+        simulation.run();
 
     }
 }

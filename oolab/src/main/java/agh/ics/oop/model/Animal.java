@@ -14,17 +14,16 @@ public class Animal {
     }
     @Override
     public String toString(){
-        return "Animal's position: %s, direction: %s".formatted(this.positionOnMap, this.myDirection);
+        return "position: %s, direction: %s".formatted(this.positionOnMap, this.myDirection);
     }
 
     boolean isAtPosition(Vector2d currentPosition, MapDirection currentDirection){
         return this.positionOnMap.equals(currentPosition);
     }
 
-    void move (MoveDirection direction) {
-
-        Vector2d myNextPosition;
-
+    public void move (MoveDirection direction) {
+        //Vector2d myNextPosition;
+        Vector2d myNextPosition = this.positionOnMap;
         if (direction == MoveDirection.RIGHT) {
             this.myDirection = myDirection.next();
         }
@@ -33,11 +32,13 @@ public class Animal {
         }
         if (direction == MoveDirection.FORWARD) {
             myNextPosition = this.positionOnMap.add(myDirection.toUnitVector());
-        } else {
-            myNextPosition = this.positionOnMap.add((myDirection.toUnitVector()).opposite());
+        }
+        if (direction == MoveDirection.BACKWARD) {
+            myNextPosition = this.positionOnMap.subtract(myDirection.toUnitVector());
         }
         if (myNextPosition.getX() >= 0 && myNextPosition.getX() <= 4 && myNextPosition.getY() >= 0 && myNextPosition.getY() <= 4) {
             this.positionOnMap = myNextPosition;
+
         }
     }
 }
