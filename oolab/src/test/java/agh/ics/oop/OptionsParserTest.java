@@ -18,9 +18,9 @@ class OptionsParserTest {
         // when
         List<MoveDirection> myDirections = OptionsParser.parse(directions);
         // then
-        assertEquals(new ArrayList<MoveDirection>(List.of(
+        assertEquals(List.of(
                 MoveDirection.FORWARD, MoveDirection.BACKWARD,
-                MoveDirection.LEFT, MoveDirection.RIGHT)), myDirections);
+                MoveDirection.LEFT, MoveDirection.RIGHT), myDirections);
     }
 
     @Test
@@ -30,7 +30,7 @@ class OptionsParserTest {
         // when
         List<MoveDirection> myDirections = OptionsParser.parse(directions);
         // then
-        assertEquals(new ArrayList<MoveDirection>(), myDirections);
+        assertEquals(List.of(), myDirections);
     }
 
     @Test
@@ -40,9 +40,9 @@ class OptionsParserTest {
         // when
         List<MoveDirection> myDirections = OptionsParser.parse(directions);
         // then
-        assertEquals(new ArrayList<MoveDirection>(List.of(
+        assertEquals(List.of(
                 MoveDirection.FORWARD, MoveDirection.BACKWARD,
-                MoveDirection.LEFT, MoveDirection.RIGHT)), myDirections);
+                MoveDirection.LEFT, MoveDirection.RIGHT), myDirections);
     }
 
     @Test
@@ -52,6 +52,6 @@ class OptionsParserTest {
         // when
         List<MoveDirection> myDirections = OptionsParser.parse(directions);
         // then
-        assertEquals(new ArrayList<MoveDirection>(), myDirections);
+        assertEquals(List.of(), myDirections);
     }
 }
