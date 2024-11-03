@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Simulation {
-    ArrayList<Animal> myAnimals;
-    private List<MoveDirection> myDirections;
+    private final List<Animal> myAnimals;
+    private final List<MoveDirection> myDirections;
 
     public Simulation(List<Vector2d> myPositions, List<MoveDirection> myDirections) {
-        myAnimals = new ArrayList<Animal>();
-        this.myDirections=myDirections;
+
+        this.myAnimals = new ArrayList<>();
+        this.myDirections = myDirections;
+
         for (Vector2d position : myPositions) {
             myAnimals.add(new Animal(position));
         }
@@ -22,11 +24,13 @@ public class Simulation {
         int numberOfAnimals = myAnimals.size();
         int numberOfDirections = myDirections.size();
 
-        for (int i = 0; i < numberOfDirections; i++){
+        for (int i = 0; i < numberOfDirections; i++) {
+
             int numberOfCurrentAnimal = i % numberOfAnimals;
             Animal myCurrentAnimal = myAnimals.get(numberOfCurrentAnimal);
+
             myCurrentAnimal.move(myDirections.get(i));
-            System.out.println("Animal %s : %s".formatted(numberOfCurrentAnimal, myCurrentAnimal.toString()));
+            System.out.printf("Animal %s : %s%n", numberOfCurrentAnimal, myCurrentAnimal);
         }
 
     }
