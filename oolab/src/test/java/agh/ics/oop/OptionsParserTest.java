@@ -3,6 +3,10 @@ package agh.ics.oop;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.OptionsParser;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class OptionsParserTest {
@@ -12,11 +16,11 @@ class OptionsParserTest {
         // given
         String[] directions = {"f", "b", "l", "r"};
         // when
-        MoveDirection[] result = OptionsParser.parse(directions);
+        List<MoveDirection> myDirections = OptionsParser.parse(directions);
         // then
-        assertArrayEquals(new MoveDirection[]{
+        assertEquals(List.of(
                 MoveDirection.FORWARD, MoveDirection.BACKWARD,
-                MoveDirection.LEFT, MoveDirection.RIGHT}, result);
+                MoveDirection.LEFT, MoveDirection.RIGHT), myDirections);
     }
 
     @Test
@@ -24,9 +28,9 @@ class OptionsParserTest {
         // given
         String[] directions = {"i", "j", "k"};
         // when
-        MoveDirection[] result = OptionsParser.parse(directions);
+        List<MoveDirection> myDirections = OptionsParser.parse(directions);
         // then
-        assertArrayEquals(new MoveDirection[]{}, result);
+        assertEquals(List.of(), myDirections);
     }
 
     @Test
@@ -34,11 +38,11 @@ class OptionsParserTest {
         // given
         String[] directions = {"f", "j", "b", "k", "l", "i", "r"};
         // when
-        MoveDirection[] result = OptionsParser.parse(directions);
+        List<MoveDirection> myDirections = OptionsParser.parse(directions);
         // then
-        assertArrayEquals(new MoveDirection[]{
+        assertEquals(List.of(
                 MoveDirection.FORWARD, MoveDirection.BACKWARD,
-                MoveDirection.LEFT, MoveDirection.RIGHT}, result);
+                MoveDirection.LEFT, MoveDirection.RIGHT), myDirections);
     }
 
     @Test
@@ -46,8 +50,8 @@ class OptionsParserTest {
         // given
         String[] directions = {};
         // when
-        MoveDirection[] result = OptionsParser.parse(directions);
+        List<MoveDirection> myDirections = OptionsParser.parse(directions);
         // then
-        assertArrayEquals(new MoveDirection[]{}, result);
+        assertEquals(List.of(), myDirections);
     }
 }
