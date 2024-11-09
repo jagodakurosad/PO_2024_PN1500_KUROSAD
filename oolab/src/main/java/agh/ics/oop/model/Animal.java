@@ -23,12 +23,14 @@ public class Animal {
         return "position: %s, direction: %s".formatted(this.positionOnMap, this.myDirection);
     }
 
-    boolean isAt(Vector2d position){
+    public boolean isAt(Vector2d position){
         return this.positionOnMap.equals(position);
     }
 
     public void move (MoveDirection direction) {
 
+        final Vector2d bottomCorner = new Vector2d(0,0);
+        final Vector2d upperCorner= new Vector2d(4,4);
         Vector2d myNextPosition = this.positionOnMap;
 
         switch(direction) {
@@ -37,8 +39,7 @@ public class Animal {
             case FORWARD -> myNextPosition = this.positionOnMap.add(myDirection.toUnitVector());
             case BACKWARD -> myNextPosition = this.positionOnMap.subtract(myDirection.toUnitVector());
         }
-
-        if (myNextPosition.getX() >= 0 && myNextPosition.getX() <= 4 && myNextPosition.getY() >= 0 && myNextPosition.getY() <= 4) {
+        if (myNextPosition.precedes(upperCorner) && myNextPosition.follows(bottomCorner)) {
             this.positionOnMap = myNextPosition;
         }
     }
