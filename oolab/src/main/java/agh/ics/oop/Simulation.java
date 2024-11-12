@@ -19,6 +19,7 @@ public class Simulation {
 
         for (Vector2d position : myPositions) {
             myAnimals.add(new Animal(position));
+            map.place(new Animal(position));
         }
     }
 
@@ -32,6 +33,7 @@ public class Simulation {
             Animal myCurrentAnimal = myAnimals.get(numberOfCurrentAnimal);
 
             map.move(myCurrentAnimal, myDirections.get(i));
+            System.out.println(myCurrentAnimal.getPositionOnMap());
             System.out.println(map.toString());
         }
 

@@ -22,14 +22,6 @@ public class Animal {
         return positionOnMap;
     }
 
-    public void setPositionOnMap(Vector2d positionOnMap) {
-        this.positionOnMap = positionOnMap;
-    }
-
-    public void setMyDirection(MapDirection myDirection) {
-        this.myDirection = myDirection;
-    }
-
     @Override
     public String toString() {
         MapDirection currentDirection = this.myDirection;

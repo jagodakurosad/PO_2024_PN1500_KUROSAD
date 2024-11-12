@@ -2,6 +2,7 @@ package agh.ics.oop.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import agh.ics.oop.model.util.MapVisualizer;
 
@@ -10,54 +11,65 @@ public class RectangularMap implements WorldMap{
     private final int width;
     private final int height;
     private final MapVisualizer visualizer;
-    private final Vector2d lowerLeft = new Vector2d(0,0);
-    private final Vector2d upperRight;
+    private final Vector2d lowerLeftCorner = new Vector2d(0,0);
+    private final Vector2d upperRightCorner;
 
 //    private final Vector2d beginningOfMap;
 //    public Vector2d getBeginningOfMap() {
 //        return beginningOfMap;
 //    }
-public RectangularMap(int height, int width) {
+public RectangularMap(int width, int height) {
         this.height = height;
         this.width = width;
         this.visualizer = new MapVisualizer(this);
-        this.upperRight=lowerLeft.add(new Vector2d(width,height));
+        this.upperRightCorner = lowerLeftCorner.add(new Vector2d(width-1,height-1));
 
 //        this.beginningOfMap = beginningOfMap;
     }
-    public Vector2d getLowerLeft() {
-        return lowerLeft;
+    public Vector2d getLowerLeftCorner() {
+        return lowerLeftCorner;
     }
-
+    public Vector2d getUpperRightCorner() {
+        return upperRightCorner;
+    }
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return position.precedes(new Vector2d(lowerLeft.getX() + width, lowerLeft.getY() + height)) && position.follows(lowerLeft);
+//        return (position.precedes(upperRight) && position.follows(lowerLeft));
+        if (!(upperRightCorner.follows(position) && lowerLeftCorner.precedes(position))) {
+            return false;
+        } else {
+            if (!isOccupied(position)) {
+                return true;
+            }
+            return false;
+        }
     }
-
     @Override
     public boolean place(Animal animal) {
-        for(Vector2d currentPosition : animals.keySet()){
-            if (animals.get(currentPosition)== animal){
-                return canMoveTo(currentPosition);
-            }
+        Vector2d currentPosition = animal.getPositionOnMap();
+
+        if (canMoveTo(currentPosition)){
+            animals.put(currentPosition,animal);
+            return true;
         }
-        return false;
+        else {
+            return false;
+        }
+
     }
     @Override
     public void move(Animal animal, MoveDirection direction) {
-        Vector2d nextPosition = animal.getPositionOnMap();
+        if (animal == null || direction == null) { return; }
         Vector2d currentPosition = animal.getPositionOnMap();
-        MapDirection currentDirection = animal.getMyDirection();
+        animal.move(this, direction);
+        Vector2d nextPosition = animal.getPositionOnMap();
 
-        switch(direction) {
-            case LEFT -> animal.setMyDirection(currentDirection.previous());
-            case RIGHT -> animal.setMyDirection(currentDirection.next());
-            case FORWARD -> nextPosition = currentPosition.add(currentDirection.toUnitVector());
-            case BACKWARD -> nextPosition = currentPosition.subtract(currentDirection.toUnitVector());
-        }
-        if (canMoveTo(nextPosition) && !isOccupied(nextPosition)) {
-            animal.setPositionOnMap(nextPosition);
+        if (!nextPosition.equals(currentPosition)){
+            if (!animals.containsKey(nextPosition)) {
+                animals.remove(currentPosition);
+                this.place(animal);
+            }
         }
     }
 
@@ -75,6 +87,6 @@ public RectangularMap(int height, int width) {
     }
     @Override
     public String toString() {
-        return visualizer.draw(lowerLeft,upperRight);
+        return visualizer.draw(lowerLeftCorner,upperRightCorner);
     }
 }
