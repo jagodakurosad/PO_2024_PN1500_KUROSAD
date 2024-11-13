@@ -25,44 +25,16 @@ public class Animal {
     @Override
     public String toString() {
         MapDirection currentDirection = this.myDirection;
-        switch (currentDirection) {
-            case EAST -> {
-                return "E";
-            }
-            case WEST -> {
-                return "W";
-            }
-            case NORTH -> {
-                return "N";
-            }
-            case SOUTH -> {
-                return "S";
-            }
-        }
-        return null;
+        return switch (currentDirection) {
+            case EAST -> "E";
+            case WEST -> "W";
+            case NORTH -> "N";
+            case SOUTH -> "S";
+        };
     }
-//        return "position: %s, direction: %s".formatted(this.positionOnMap, this.myDirection);
-//    }
 
     public boolean isAt(Vector2d position) {
         return this.positionOnMap.equals(position);
-    }
-
-    public void newmove(MoveDirection direction) {
-
-        final Vector2d bottomCorner = new Vector2d(0, 0);
-        final Vector2d upperCorner = new Vector2d(4, 4);
-        Vector2d myNextPosition = this.positionOnMap;
-
-        switch (direction) {
-            case LEFT -> this.myDirection = myDirection.previous();
-            case RIGHT -> this.myDirection = myDirection.next();
-            case FORWARD -> myNextPosition = this.positionOnMap.add(myDirection.toUnitVector());
-            case BACKWARD -> myNextPosition = this.positionOnMap.subtract(myDirection.toUnitVector());
-        }
-        if (myNextPosition.precedes(upperCorner) && myNextPosition.follows(bottomCorner)) {
-            this.positionOnMap = myNextPosition;
-        }
     }
 
     public void move(MoveValidator validator, MoveDirection direction) {

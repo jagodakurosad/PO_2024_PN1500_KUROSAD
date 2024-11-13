@@ -2,10 +2,6 @@ package agh.ics.oop.model;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RectangularMapTest {
@@ -60,7 +56,7 @@ public class RectangularMapTest {
         assertEquals(new Vector2d(3,2), animal3.getPositionOnMap());
     }
     @Test
-    void checkIfPlacingAnimalsOnMapWorksCorrectly11() {
+    void checkIfPlacingAnimalsOnMapWorksCorrectly() {
         // given
         WorldMap mapForAnimals = new RectangularMap(4, 5);
 

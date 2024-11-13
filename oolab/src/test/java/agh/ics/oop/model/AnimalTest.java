@@ -11,6 +11,7 @@ class AnimalTest {
         Animal myAnimal2 = new Animal(new Vector2d(1,3));
         //then
         assertEquals(MapDirection.NORTH, myAnimal1.getMyDirection());
+        assertEquals(MapDirection.NORTH, myAnimal2.getMyDirection());
     }
 
     @Test

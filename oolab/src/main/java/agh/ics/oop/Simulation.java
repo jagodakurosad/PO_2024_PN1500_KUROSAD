@@ -33,8 +33,7 @@ public class Simulation {
             Animal myCurrentAnimal = myAnimals.get(numberOfCurrentAnimal);
 
             map.move(myCurrentAnimal, myDirections.get(i));
-            System.out.println(myCurrentAnimal.getPositionOnMap());
-            System.out.println(map.toString());
+            System.out.println(map);
         }
 
     }
