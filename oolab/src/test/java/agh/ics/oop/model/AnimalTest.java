@@ -11,6 +11,7 @@ class AnimalTest {
         Animal myAnimal2 = new Animal(new Vector2d(1,3));
         //then
         assertEquals(MapDirection.NORTH, myAnimal1.getMyDirection());
+        assertEquals(MapDirection.NORTH, myAnimal2.getMyDirection());
     }
 
     @Test
@@ -19,9 +20,11 @@ class AnimalTest {
         Animal myAnimal1 = new Animal();
         Animal myAnimal2 = new Animal();
 
+        WorldMap mapForAnimals = new RectangularMap(5,5);
         //when
-        myAnimal1.move(MoveDirection.LEFT);
-        myAnimal2.move(MoveDirection.RIGHT);
+        ;
+        myAnimal1.move(mapForAnimals, MoveDirection.LEFT);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
 
         //then
         assertEquals(MapDirection.WEST, myAnimal1.getMyDirection());
@@ -31,17 +34,19 @@ class AnimalTest {
     @Test
     void isOrientationAfterTwoRotationsCorrect() {
         //given
+        WorldMap mapForAnimals = new RectangularMap(5,5);
+
         Animal myAnimal1 = new Animal();
         Animal myAnimal2 = new Animal();
         Animal myAnimal3 = new Animal();
 
         //when
-        myAnimal1.move(MoveDirection.LEFT);
-        myAnimal1.move(MoveDirection.LEFT);
-        myAnimal2.move(MoveDirection.RIGHT);
-        myAnimal2.move(MoveDirection.RIGHT);
-        myAnimal3.move(MoveDirection.RIGHT);
-        myAnimal3.move(MoveDirection.LEFT);
+        myAnimal1.move(mapForAnimals, MoveDirection.LEFT);
+        myAnimal1.move(mapForAnimals, MoveDirection.LEFT);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal3.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal3.move(mapForAnimals, MoveDirection.LEFT);
 
         //then
         assertEquals(MapDirection.SOUTH, myAnimal1.getMyDirection());
@@ -52,16 +57,18 @@ class AnimalTest {
     @Test
     void isOrientationAfterThreeRotationsCorrect() {
         //given
+        WorldMap mapForAnimals = new RectangularMap(5,5);
+
         Animal myAnimal1 = new Animal();
         Animal myAnimal2 = new Animal();
 
         //when
-        myAnimal1.move(MoveDirection.LEFT);
-        myAnimal1.move(MoveDirection.LEFT);
-        myAnimal1.move(MoveDirection.LEFT);
-        myAnimal2.move(MoveDirection.RIGHT);
-        myAnimal2.move(MoveDirection.RIGHT);
-        myAnimal2.move(MoveDirection.RIGHT);
+        myAnimal1.move(mapForAnimals, MoveDirection.LEFT);
+        myAnimal1.move(mapForAnimals, MoveDirection.LEFT);
+        myAnimal1.move(mapForAnimals, MoveDirection.LEFT);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
 
 
         //then
@@ -72,18 +79,20 @@ class AnimalTest {
     @Test
     void isOrientationAfterFourRotationsCorrect() {
         //given
+        WorldMap mapForAnimals = new RectangularMap(5,5);
+
         Animal myAnimal1 = new Animal();
         Animal myAnimal2 = new Animal();
 
         //when
-        myAnimal1.move(MoveDirection.LEFT);
-        myAnimal1.move(MoveDirection.LEFT);
-        myAnimal1.move(MoveDirection.LEFT);
-        myAnimal1.move(MoveDirection.LEFT);
-        myAnimal2.move(MoveDirection.RIGHT);
-        myAnimal2.move(MoveDirection.RIGHT);
-        myAnimal2.move(MoveDirection.RIGHT);
-        myAnimal2.move(MoveDirection.RIGHT);
+        myAnimal1.move(mapForAnimals, MoveDirection.LEFT);
+        myAnimal1.move(mapForAnimals, MoveDirection.LEFT);
+        myAnimal1.move(mapForAnimals, MoveDirection.LEFT);
+        myAnimal1.move(mapForAnimals, MoveDirection.LEFT);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
 
         //then
         assertEquals(MapDirection.NORTH, myAnimal1.getMyDirection());
@@ -93,12 +102,14 @@ class AnimalTest {
     @Test
     void isPositionAfterMovementCorrectPositionNORTH() {
         //given
+        WorldMap mapForAnimals = new RectangularMap(5,5);
+
         Animal myAnimal1 = new Animal();
         Animal myAnimal2 = new Animal();
 
         //when
-        myAnimal1.move(MoveDirection.FORWARD);
-        myAnimal2.move(MoveDirection.BACKWARD);
+        myAnimal1.move(mapForAnimals, MoveDirection.FORWARD);
+        myAnimal2.move(mapForAnimals, MoveDirection.BACKWARD);
 
         //then
         assertEquals(new Vector2d(2,3), myAnimal1.getPositionOnMap());
@@ -108,14 +119,16 @@ class AnimalTest {
     @Test
     void isPositionAfterMovementCorrectPositionEAST() {
         //given
+        WorldMap mapForAnimals = new RectangularMap(5,5);
+
         Animal myAnimal1 = new Animal();
         Animal myAnimal2 = new Animal();
 
         //when
-        myAnimal1.move(MoveDirection.RIGHT);
-        myAnimal1.move(MoveDirection.FORWARD);
-        myAnimal2.move(MoveDirection.RIGHT);
-        myAnimal2.move(MoveDirection.BACKWARD);
+        myAnimal1.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal1.move(mapForAnimals, MoveDirection.FORWARD);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal2.move(mapForAnimals, MoveDirection.BACKWARD);
 
         //then
         assertEquals(new Vector2d(3,2), myAnimal1.getPositionOnMap());
@@ -125,16 +138,18 @@ class AnimalTest {
     @Test
     void isPositionAfterMovementCorrectPositionSOUTH() {
         //given
+        WorldMap mapForAnimals = new RectangularMap(5,5);
+
         Animal myAnimal1 = new Animal();
         Animal myAnimal2 = new Animal();
 
         //when
-        myAnimal1.move(MoveDirection.RIGHT);
-        myAnimal1.move(MoveDirection.RIGHT);
-        myAnimal1.move(MoveDirection.FORWARD);
-        myAnimal2.move(MoveDirection.RIGHT);
-        myAnimal2.move(MoveDirection.RIGHT);
-        myAnimal2.move(MoveDirection.BACKWARD);
+        myAnimal1.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal1.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal1.move(mapForAnimals, MoveDirection.FORWARD);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal2.move(mapForAnimals, MoveDirection.BACKWARD);
 
         //then
         assertEquals(new Vector2d(2,1), myAnimal1.getPositionOnMap());
@@ -144,18 +159,20 @@ class AnimalTest {
     @Test
     void isPositionAfterMovementCorrectPositionWEST() {
         //given
+        WorldMap mapForAnimals = new RectangularMap(5,5);
+
         Animal myAnimal1 = new Animal();
         Animal myAnimal2 = new Animal();
 
         //when
-        myAnimal1.move(MoveDirection.RIGHT);
-        myAnimal1.move(MoveDirection.RIGHT);
-        myAnimal1.move(MoveDirection.RIGHT);
-        myAnimal1.move(MoveDirection.FORWARD);
-        myAnimal2.move(MoveDirection.RIGHT);
-        myAnimal2.move(MoveDirection.RIGHT);
-        myAnimal2.move(MoveDirection.RIGHT);
-        myAnimal2.move(MoveDirection.BACKWARD);
+        myAnimal1.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal1.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal1.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal1.move(mapForAnimals, MoveDirection.FORWARD);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal2.move(mapForAnimals, MoveDirection.BACKWARD);
 
         //then
         assertEquals(new Vector2d(1,2), myAnimal1.getPositionOnMap());
@@ -165,7 +182,9 @@ class AnimalTest {
     @Test
     void checkIfAnimalStaysWithinMyMap() {
         //given
-        Vector2d[] myVectors2d = { new Vector2d(4,4), new Vector2d(0,0)};
+        RectangularMap mapForAnimals = new RectangularMap(5,5);
+
+        Vector2d[] myVectors2d = { mapForAnimals.getUpperRightCorner(), mapForAnimals.getLowerLeftCorner()};
 
         Animal myAnimal1 = new Animal(myVectors2d[0]);
         Animal myAnimal2 = new Animal(myVectors2d[0]);
@@ -177,33 +196,33 @@ class AnimalTest {
         Animal myAnimal8 = new Animal(myVectors2d[1]);
 
         //when
-        myAnimal1.move(MoveDirection.FORWARD);
+        myAnimal1.move(mapForAnimals, MoveDirection.FORWARD);
 
-        myAnimal2.move(MoveDirection.RIGHT);
-        myAnimal2.move(MoveDirection.FORWARD);
+        myAnimal2.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal2.move(mapForAnimals, MoveDirection.FORWARD);
 
-        myAnimal3.move(MoveDirection.RIGHT);
-        myAnimal3.move(MoveDirection.RIGHT);
-        myAnimal3.move(MoveDirection.BACKWARD);
+        myAnimal3.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal3.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal3.move(mapForAnimals, MoveDirection.BACKWARD);
 
-        myAnimal4.move(MoveDirection.RIGHT);
-        myAnimal4.move(MoveDirection.RIGHT);
-        myAnimal4.move(MoveDirection.RIGHT);
-        myAnimal4.move(MoveDirection.BACKWARD);
+        myAnimal4.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal4.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal4.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal4.move(mapForAnimals, MoveDirection.BACKWARD);
 
-        myAnimal5.move(MoveDirection.BACKWARD);
+        myAnimal5.move(mapForAnimals, MoveDirection.BACKWARD);
 
-        myAnimal6.move(MoveDirection.RIGHT);
-        myAnimal6.move(MoveDirection.BACKWARD);
+        myAnimal6.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal6.move(mapForAnimals, MoveDirection.BACKWARD);
 
-        myAnimal7.move(MoveDirection.RIGHT);
-        myAnimal7.move(MoveDirection.RIGHT);
-        myAnimal7.move(MoveDirection.FORWARD);
+        myAnimal7.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal7.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal7.move(mapForAnimals, MoveDirection.FORWARD);
 
-        myAnimal8.move(MoveDirection.RIGHT);
-        myAnimal8.move(MoveDirection.RIGHT);
-        myAnimal8.move(MoveDirection.RIGHT);
-        myAnimal8.move(MoveDirection.FORWARD);
+        myAnimal8.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal8.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal8.move(mapForAnimals, MoveDirection.RIGHT);
+        myAnimal8.move(mapForAnimals, MoveDirection.FORWARD);
 
         //then
         assertEquals(myVectors2d[0],myAnimal1.getPositionOnMap());
