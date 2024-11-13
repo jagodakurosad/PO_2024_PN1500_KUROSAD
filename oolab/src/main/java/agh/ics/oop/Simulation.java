@@ -1,8 +1,6 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.*;
-
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +16,11 @@ public class Simulation {
         this.map = map;
 
         for (Vector2d position : myPositions) {
-            myAnimals.add(new Animal(position));
-            map.place(new Animal(position));
+            Animal animal = new Animal(position);
+
+            if (map.place(animal)) {
+                myAnimals.add(animal);
+            }
         }
     }
 

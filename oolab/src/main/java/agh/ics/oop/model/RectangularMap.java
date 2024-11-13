@@ -8,15 +8,15 @@ import agh.ics.oop.model.util.MapVisualizer;
 public class RectangularMap implements WorldMap{
     private final Map<Vector2d, Animal> animals = new HashMap<>();
     private final MapVisualizer visualizer;
-    private static final Vector2d LOWER_LEFT_CORNER = new Vector2d(0,0);
+    private final Vector2d lowerLeftCorner = new Vector2d(0,0);
     private final Vector2d upperRightCorner;
 
 public RectangularMap(int width, int height) {
         this.visualizer = new MapVisualizer(this);
-        this.upperRightCorner = LOWER_LEFT_CORNER.add(new Vector2d(width-1,height-1));
+        this.upperRightCorner = lowerLeftCorner.add(new Vector2d(width-1,height-1));
     }
     public Vector2d getLowerLeftCorner() {
-        return LOWER_LEFT_CORNER;
+        return lowerLeftCorner;
     }
     public Vector2d getUpperRightCorner() {
         return upperRightCorner;
@@ -24,14 +24,7 @@ public RectangularMap(int width, int height) {
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        if (!(upperRightCorner.follows(position) && LOWER_LEFT_CORNER.precedes(position))) {
-            return false;
-        } else {
-            if (!isOccupied(position)) {
-                return true;
-            }
-            return false;
-        }
+        return (upperRightCorner.follows(position) && lowerLeftCorner.precedes(position) && !isOccupied(position));
     }
     @Override
     public boolean place(Animal animal) {
@@ -72,6 +65,6 @@ public RectangularMap(int width, int height) {
     }
     @Override
     public String toString() {
-        return visualizer.draw(LOWER_LEFT_CORNER,upperRightCorner);
+        return visualizer.draw(lowerLeftCorner,upperRightCorner);
     }
 }

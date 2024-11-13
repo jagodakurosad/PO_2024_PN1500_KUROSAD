@@ -24,8 +24,7 @@ public class Animal {
 
     @Override
     public String toString() {
-        MapDirection currentDirection = this.myDirection;
-        return switch (currentDirection) {
+        return switch (this.myDirection) {
             case EAST -> "E";
             case WEST -> "W";
             case NORTH -> "N";
