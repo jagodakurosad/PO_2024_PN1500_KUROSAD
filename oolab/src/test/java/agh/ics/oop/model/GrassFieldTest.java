@@ -30,19 +30,19 @@ class GrassFieldTest {
     void checkIfNumberOfTuftsOfGrassOnMapIsCorrect() {
         //given
         WorldMap mapForAnimals = new GrassField(5);
-        int turtsOfGrassCounter = 0;
+        int tuftsOfGrassCounter = 0;
 
         //when
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (mapForAnimals.isOccupied(new Vector2d(i, j))) {
-                    turtsOfGrassCounter += 1;
+                    tuftsOfGrassCounter += 1;
                 }
             }
         }
 
         //then
-        assertEquals(5,turtsOfGrassCounter);
+        assertEquals(5, tuftsOfGrassCounter);
     }
 
     @Test
@@ -113,7 +113,7 @@ class GrassFieldTest {
         //given
         WorldMap mapForAnimals = new GrassField(1);
 
-        int turtsOfGrassCounter = 0;
+        int tuftsOfGrassCounter = 0;
         boolean flag = false;
         Vector2d notOccupiedPosition = new Vector2d(-1,-1);
         Vector2d occupiedPosition = new Vector2d(-1,-1);
@@ -121,7 +121,7 @@ class GrassFieldTest {
         for(int i=0; i<4; i++){
             for(int j=0; j<4; j++){
                 if(mapForAnimals.isOccupied(new Vector2d(i,j))){
-                    turtsOfGrassCounter+=1;
+                    tuftsOfGrassCounter+=1;
                     occupiedPosition = new Vector2d(i,j);
                 }
                 else{
@@ -135,7 +135,7 @@ class GrassFieldTest {
         //when
 
         //then
-        assertEquals(1, turtsOfGrassCounter);
+        assertEquals(1, tuftsOfGrassCounter);
         assertNull(mapForAnimals.objectAt(notOccupiedPosition));
         assertTrue(mapForAnimals.objectAt(occupiedPosition) instanceof Grass);
     }

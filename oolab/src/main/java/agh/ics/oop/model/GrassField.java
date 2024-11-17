@@ -9,22 +9,22 @@ import static java.lang.Double.POSITIVE_INFINITY;
 import static java.lang.Math.sqrt;
 
 public class GrassField extends AbstractWorldMap {
-    private final Map<Vector2d, Grass> turtsOfGrass = new HashMap<>();
-    public GrassField(int NumberOfTurtsOfGrass) {
+    private final Map<Vector2d, Grass> tuftsOfGrass = new HashMap<>();
+    public GrassField(int NumberOfTuftsOfGrass) {
         super();
 
-        RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator((int) sqrt(10*NumberOfTurtsOfGrass), (int) sqrt(10*NumberOfTurtsOfGrass), NumberOfTurtsOfGrass);
+        RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator((int) sqrt(10*NumberOfTuftsOfGrass), (int) sqrt(10*NumberOfTuftsOfGrass), NumberOfTuftsOfGrass);
         Iterator<Vector2d> positionsIterator = randomPositionGenerator.iterator();
 
         while(positionsIterator.hasNext()) {
             Vector2d tuftOfGrassPosition = positionsIterator.next();
-            turtsOfGrass.put(tuftOfGrassPosition, new Grass(tuftOfGrassPosition));
+            tuftsOfGrass.put(tuftOfGrassPosition, new Grass(tuftOfGrassPosition));
         }
-//        while(turtsOfGrass.size() < NumberOfTurtsOfGrass){
+//        while(tuftsOfGrass.size() < NumberOfTuftsOfGrass){
 //            Random random = new Random();
-//            Vector2d turtOfGrassPosition = new Vector2d(random.nextInt(0,(int) sqrt(10*NumberOfTurtsOfGrass) +1), random.nextInt(0,(int) sqrt(10*NumberOfTurtsOfGrass) +1));
-//            if(!turtsOfGrass.containsKey(turtOfGrassPosition)){
-//                turtsOfGrass.put(turtOfGrassPosition,new Grass(turtOfGrassPosition));
+//            Vector2d tuftOfGrassPosition = new Vector2d(random.nextInt(0,(int) sqrt(10*NumberOfTuftsOfGrass) +1), random.nextInt(0,(int) sqrt(10*NumberOfTuftsOfGrass) +1));
+//            if(!tuftsOfGrass.containsKey(tuftOfGrassPosition)){
+//                tuftsOfGrass.put(tuftOfGrassPosition,new Grass(tuftOfGrassPosition));
 //            }
 //        }
     }
@@ -32,13 +32,13 @@ public class GrassField extends AbstractWorldMap {
     public WorldElement objectAt (Vector2d position){
         WorldElement element = super.objectAt(position);
         if(element != null) { return element; }
-        return turtsOfGrass.get(position);
+        return tuftsOfGrass.get(position);
     }
 
     @Override
     public Collection<WorldElement> getElements() {
         Collection<WorldElement> elementsOnMap = super.getElements();
-        elementsOnMap.addAll(turtsOfGrass.values());
+        elementsOnMap.addAll(tuftsOfGrass.values());
 
         return elementsOnMap;
     }
@@ -48,12 +48,12 @@ public class GrassField extends AbstractWorldMap {
         Vector2d upperRightCorner = new Vector2d((int) NEGATIVE_INFINITY, (int) NEGATIVE_INFINITY);
         Vector2d lowerLeftCorner = new Vector2d((int) POSITIVE_INFINITY, (int) POSITIVE_INFINITY);
 
-        if(animals.isEmpty() && turtsOfGrass.isEmpty()){
+        if(animals.isEmpty() && tuftsOfGrass.isEmpty()){
             return visualizer.draw(new Vector2d(0,0),new Vector2d(0,0));
         }
-        for(Vector2d currentTurtOfGrass : turtsOfGrass.keySet()){
-            upperRightCorner = upperRightCorner.upperRight(currentTurtOfGrass);
-            lowerLeftCorner = lowerLeftCorner.lowerLeft(currentTurtOfGrass);
+        for(Vector2d currentTuftOfGrass : tuftsOfGrass.keySet()){
+            upperRightCorner = upperRightCorner.upperRight(currentTuftOfGrass);
+            lowerLeftCorner = lowerLeftCorner.lowerLeft(currentTuftOfGrass);
         }
         for(Vector2d currentAnimal : animals.keySet()){
             upperRightCorner = upperRightCorner.upperRight(currentAnimal);
