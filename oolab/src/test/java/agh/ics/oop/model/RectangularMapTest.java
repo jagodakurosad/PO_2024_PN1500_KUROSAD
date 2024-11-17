@@ -9,20 +9,26 @@ public class RectangularMapTest {
     @Test
     void checkIfMoveToGivenPositionIsPossible(){
         //given
-        WorldMap map = new RectangularMap(4,5);
+        WorldMap mapForAnimals = new RectangularMap(4,5);
         Vector2d position1 = new Vector2d(3,4);
         Vector2d position2 = new Vector2d(4,5);
         Vector2d position3 = new Vector2d(-1,3);
         Vector2d position4 = new Vector2d(0,3);
         Vector2d position5 = new Vector2d(0,0);
+        Vector2d position6 = new Vector2d(1,2);
+
+        Animal animal1 = new Animal(position6);
+
+        mapForAnimals.place(animal1);
         //when
 
         //then
-        assertTrue(map.canMoveTo(position1));
-        assertFalse(map.canMoveTo(position2));
-        assertFalse(map.canMoveTo(position3));
-        assertTrue(map.canMoveTo(position4));
-        assertTrue(map.canMoveTo(position5));
+        assertTrue(mapForAnimals.canMoveTo(position1));
+        assertFalse(mapForAnimals.canMoveTo(position2));
+        assertFalse(mapForAnimals.canMoveTo(position3));
+        assertTrue(mapForAnimals.canMoveTo(position4));
+        assertTrue(mapForAnimals.canMoveTo(position5));
+        assertFalse(mapForAnimals.canMoveTo(position6));
     }
 
     @Test

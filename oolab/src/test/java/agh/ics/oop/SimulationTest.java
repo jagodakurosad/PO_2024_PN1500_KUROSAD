@@ -13,7 +13,7 @@ public class SimulationTest {
     @Test
     void checkIfBasicSimulationWorksCorrectly() {
         // given
-        WorldMap mapForAnimals = new RectangularMap(5,5);
+        RectangularMap mapForAnimals = new RectangularMap(5,5);
 
         Vector2d position1 = new Vector2d(1,1);
         Vector2d position2 = new Vector2d(2, 2);
@@ -32,20 +32,20 @@ public class SimulationTest {
         simulation.run();
 
         // then
-        Animal animal1 = mapForAnimals.objectAt(new Vector2d(1, 2));
-        Animal animal2 = mapForAnimals.objectAt(new Vector2d(3, 2));
+        WorldElement animal1 = mapForAnimals.objectAt(new Vector2d(1, 2));
+        WorldElement animal2 = mapForAnimals.objectAt(new Vector2d(3, 2));
 
         //assertNotNull(animal1);
-        assertEquals(MapDirection.EAST, animal1.getMyDirection());
+        assertEquals(MapDirection.EAST, animal1.getPositionOnMap());
 
         assertNotNull(animal2);
-        assertEquals(MapDirection.NORTH, animal2.getMyDirection());
+        assertEquals(MapDirection.NORTH, animal2.getPositionOnMap());
     }
 
     @Test
     void checkIfNothingIncorrectHappensNearBoundary() {
         // given
-        WorldMap mapForAnimals = new RectangularMap(4,5);
+        RectangularMap mapForAnimals = new RectangularMap(4,5);
 
         Vector2d position = new Vector2d(3,4);
 
@@ -63,7 +63,7 @@ public class SimulationTest {
         simulation.run();
 
         // then
-        Animal animal = mapForAnimals.objectAt(position);
+        WorldElement animal = mapForAnimals.objectAt(position);
 
         assertNotNull(animal);
         assertEquals(position, animal.getPositionOnMap());
@@ -72,7 +72,7 @@ public class SimulationTest {
     @Test
     void checkIfSimulationWorksWithOccupiedPosition() {
         // given
-        WorldMap mapForAnimals = new RectangularMap(4,5);
+        RectangularMap mapForAnimals = new RectangularMap(4,5);
 
         Vector2d position1 = new Vector2d(1,1);
         Vector2d position2 = new Vector2d(1,2);
@@ -90,8 +90,8 @@ public class SimulationTest {
         simulation.run();
 
         // then
-        Animal animal1 = mapForAnimals.objectAt(new Vector2d(1, 1));
-        Animal animal2 = mapForAnimals.objectAt(new Vector2d(1, 2));
+        WorldElement animal1 = mapForAnimals.objectAt(new Vector2d(1, 1));
+        WorldElement animal2 = mapForAnimals.objectAt(new Vector2d(1, 2));
 
         assertNotNull(animal1);
         assertNotNull(animal2);
