@@ -26,8 +26,4 @@ public class RectangularMap extends AbstractWorldMap{
         return visualizer.draw(lowerLeftCorner,upperRightCorner);
     }
 
-    @Override
-    public List getELements() {
-        return null;
-    }
 }

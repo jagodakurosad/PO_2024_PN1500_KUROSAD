@@ -1,6 +1,7 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.*;
+import agh.ics.oop.model.util.RandomPositionGenerator;
 
 import java.util.List;
 
@@ -28,5 +29,7 @@ public class World {
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
         Simulation simulation = new Simulation(map,positions, directions);
         simulation.run();
+
+        new RandomPositionGenerator(2,2,2);
     }
 }

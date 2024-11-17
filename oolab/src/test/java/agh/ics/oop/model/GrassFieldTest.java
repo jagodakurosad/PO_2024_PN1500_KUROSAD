@@ -10,20 +10,39 @@ class GrassFieldTest {
     @Test
     void checkIfPlacingAnimalsOnGrassFieldWorksCorrectly() {
         //given
-        WorldMap map = new GrassField(5);
+        WorldMap mapForAnimals = new GrassField(5);
         Animal animal1 = new Animal(new Vector2d(2, 2));
         Animal animal2 = new Animal(new Vector2d(2, 2));
         Animal animal3 = new Animal(new Vector2d(-1,8));
 
         //when
-        boolean result1 = map.place(animal1);
-        boolean result2 = map.place(animal2);
-        boolean result3 = map.place(animal3);
+        boolean result1 = mapForAnimals.place(animal1);
+        boolean result2 = mapForAnimals.place(animal2);
+        boolean result3 = mapForAnimals.place(animal3);
 
         //then
         assertTrue(result1);
         assertFalse(result2);
         assertTrue(result3);
+    }
+
+    @Test
+    void checkIfNumberOfTuftsOfGrassOnMapIsCorrect() {
+        //given
+        WorldMap mapForAnimals = new GrassField(5);
+        int turtsOfGrassCounter = 0;
+
+        //when
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (mapForAnimals.isOccupied(new Vector2d(i, j))) {
+                    turtsOfGrassCounter += 1;
+                }
+            }
+        }
+
+        //then
+        assertEquals(5,turtsOfGrassCounter);
     }
 
     @Test

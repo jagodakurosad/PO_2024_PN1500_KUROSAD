@@ -1,9 +1,8 @@
 package agh.ics.oop.model;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.List;
+import agh.ics.oop.model.util.RandomPositionGenerator;
+
+import java.util.*;
 
 import static java.lang.Double.NEGATIVE_INFINITY;
 import static java.lang.Double.POSITIVE_INFINITY;
@@ -14,13 +13,20 @@ public class GrassField extends AbstractWorldMap {
     public GrassField(int NumberOfTurtsOfGrass) {
         super();
 
-        while(turtsOfGrass.size() < NumberOfTurtsOfGrass){
-            Random random = new Random();
-            Vector2d turtOfGrassPosition = new Vector2d(random.nextInt(0,(int) sqrt(10*NumberOfTurtsOfGrass) +1), random.nextInt(0,(int) sqrt(10*NumberOfTurtsOfGrass) +1));
-            if(!turtsOfGrass.containsKey(turtOfGrassPosition)){
-                turtsOfGrass.put(turtOfGrassPosition,new Grass(turtOfGrassPosition));
-            }
+        RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator((int) sqrt(10*NumberOfTurtsOfGrass), (int) sqrt(10*NumberOfTurtsOfGrass), NumberOfTurtsOfGrass);
+        Iterator<Vector2d> positionsIterator = randomPositionGenerator.iterator();
+
+        while(positionsIterator.hasNext()) {
+            Vector2d tuftOfGrassPosition = positionsIterator.next();
+            turtsOfGrass.put(tuftOfGrassPosition, new Grass(tuftOfGrassPosition));
         }
+//        while(turtsOfGrass.size() < NumberOfTurtsOfGrass){
+//            Random random = new Random();
+//            Vector2d turtOfGrassPosition = new Vector2d(random.nextInt(0,(int) sqrt(10*NumberOfTurtsOfGrass) +1), random.nextInt(0,(int) sqrt(10*NumberOfTurtsOfGrass) +1));
+//            if(!turtsOfGrass.containsKey(turtOfGrassPosition)){
+//                turtsOfGrass.put(turtOfGrassPosition,new Grass(turtOfGrassPosition));
+//            }
+//        }
     }
     @Override
     public WorldElement objectAt (Vector2d position){
@@ -30,8 +36,8 @@ public class GrassField extends AbstractWorldMap {
     }
 
     @Override
-    public List<WorldElement> getElements() {
-        List<WorldElement> elementsOnMap = super.getElements();
+    public Collection<WorldElement> getElements() {
+        Collection<WorldElement> elementsOnMap = super.getElements();
         elementsOnMap.addAll(turtsOfGrass.values());
 
         return elementsOnMap;
