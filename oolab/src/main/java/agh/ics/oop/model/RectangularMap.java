@@ -7,7 +7,6 @@ public class RectangularMap extends AbstractWorldMap{
     private final Vector2d upperRightCorner;
 
     public RectangularMap(int width, int height) {
-        super();
         this.upperRightCorner = lowerLeftCorner.add(new Vector2d(width-1,height-1));
     }
     public Vector2d getLowerLeftCorner() {
@@ -19,7 +18,7 @@ public class RectangularMap extends AbstractWorldMap{
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return (upperRightCorner.follows(position) && lowerLeftCorner.precedes(position) && super.canMoveTo(position));
+        return (super.canMoveTo(position) && upperRightCorner.follows(position) && lowerLeftCorner.precedes(position));
     }
     @Override
     public String toString() {

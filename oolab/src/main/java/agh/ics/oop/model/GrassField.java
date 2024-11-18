@@ -9,11 +9,14 @@ import static java.lang.Double.POSITIVE_INFINITY;
 import static java.lang.Math.sqrt;
 
 public class GrassField extends AbstractWorldMap {
+    private static final int MIN_INT = Integer.MIN_VALUE ;
+    private static final int MAX_INT = Integer.MAX_VALUE;
     private final Map<Vector2d, Grass> tuftsOfGrass = new HashMap<>();
     public GrassField(int NumberOfTuftsOfGrass) {
         super();
+        int rangeOfTuftsOfGrass = (int) sqrt(10*NumberOfTuftsOfGrass);
 
-        RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator((int) sqrt(10*NumberOfTuftsOfGrass), (int) sqrt(10*NumberOfTuftsOfGrass), NumberOfTuftsOfGrass);
+        RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator(rangeOfTuftsOfGrass, rangeOfTuftsOfGrass, NumberOfTuftsOfGrass);
         Iterator<Vector2d> positionsIterator = randomPositionGenerator.iterator();
 
         while(positionsIterator.hasNext()) {
@@ -45,8 +48,8 @@ public class GrassField extends AbstractWorldMap {
 
     @Override
     public String toString(){
-        Vector2d upperRightCorner = new Vector2d((int) NEGATIVE_INFINITY, (int) NEGATIVE_INFINITY);
-        Vector2d lowerLeftCorner = new Vector2d((int) POSITIVE_INFINITY, (int) POSITIVE_INFINITY);
+        Vector2d upperRightCorner = new Vector2d(MIN_INT, MIN_INT);
+        Vector2d lowerLeftCorner = new Vector2d(MAX_INT, MAX_INT);
 
         if(animals.isEmpty() && tuftsOfGrass.isEmpty()){
             return visualizer.draw(new Vector2d(0,0),new Vector2d(0,0));
