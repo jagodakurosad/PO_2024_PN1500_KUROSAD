@@ -1,8 +1,12 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.*;
+import agh.ics.oop.model.util.RandomPositionGenerator;
 
 import java.util.List;
+
+import static java.lang.Double.NEGATIVE_INFINITY;
+import static java.lang.Double.POSITIVE_INFINITY;
 
 public class World {
     public static void run(MoveDirection[] args){
@@ -20,11 +24,12 @@ public class World {
 
 //        Animal myAnimal = new Animal();
 //        System.out.println(myAnimal.toString());
-        WorldMap map = new RectangularMap(4,4);
+        WorldMap map = new GrassField(10);
         List<MoveDirection> directions = OptionsParser.parse(new String[]{"f","b", "r", "l","f","f", "r", "r", "f", "f", "f", "f", "f", "f", "f","f"});
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
         Simulation simulation = new Simulation(map,positions, directions);
         simulation.run();
 
+        new RandomPositionGenerator(2,2,2);
     }
 }
