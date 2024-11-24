@@ -1,6 +1,6 @@
 package agh.ics.oop.model;
 
-import java.util.List;
+import agh.ics.oop.model.util.Boundary;
 
 public class RectangularMap extends AbstractWorldMap{
     private final Vector2d lowerLeftCorner = new Vector2d(0,0);
@@ -20,9 +20,9 @@ public class RectangularMap extends AbstractWorldMap{
     public boolean canMoveTo(Vector2d position) {
         return (super.canMoveTo(position) && upperRightCorner.follows(position) && lowerLeftCorner.precedes(position));
     }
-    @Override
-    public String toString() {
-        return visualizer.draw(lowerLeftCorner,upperRightCorner);
-    }
 
+    @Override
+    public Boundary getCurrentBounds() {
+        return new Boundary(lowerLeftCorner,upperRightCorner);
+    }
 }

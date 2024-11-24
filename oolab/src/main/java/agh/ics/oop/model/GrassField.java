@@ -1,11 +1,10 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.Boundary;
 import agh.ics.oop.model.util.RandomPositionGenerator;
 
 import java.util.*;
 
-import static java.lang.Double.NEGATIVE_INFINITY;
-import static java.lang.Double.POSITIVE_INFINITY;
 import static java.lang.Math.sqrt;
 
 public class GrassField extends AbstractWorldMap {
@@ -47,22 +46,19 @@ public class GrassField extends AbstractWorldMap {
     }
 
     @Override
-    public String toString(){
+    public Boundary getCurrentBounds() {
         Vector2d upperRightCorner = new Vector2d(MIN_INT, MIN_INT);
         Vector2d lowerLeftCorner = new Vector2d(MAX_INT, MAX_INT);
 
         if(animals.isEmpty() && tuftsOfGrass.isEmpty()){
-            return visualizer.draw(new Vector2d(0,0),new Vector2d(0,0));
+            return new Boundary(new Vector2d(0,0), new Vector2d(0,0));
         }
-        for(Vector2d currentTuftOfGrass : tuftsOfGrass.keySet()){
-            upperRightCorner = upperRightCorner.upperRight(currentTuftOfGrass);
-            lowerLeftCorner = lowerLeftCorner.lowerLeft(currentTuftOfGrass);
-        }
-        for(Vector2d currentAnimal : animals.keySet()){
-            upperRightCorner = upperRightCorner.upperRight(currentAnimal);
-            lowerLeftCorner = lowerLeftCorner.lowerLeft(currentAnimal);
+        for(WorldElement elementOfWorld : getElements()){
+            upperRightCorner = upperRightCorner.upperRight(elementOfWorld.getPositionOnMap());
+            lowerLeftCorner = lowerLeftCorner.lowerLeft(elementOfWorld.getPositionOnMap());
         }
 
-        return visualizer.draw(lowerLeftCorner,upperRightCorner);
+        return new Boundary(lowerLeftCorner,upperRightCorner);
     }
 }
+

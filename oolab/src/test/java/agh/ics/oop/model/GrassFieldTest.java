@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.IncorrectPositionException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,15 +16,10 @@ class GrassFieldTest {
         Animal animal2 = new Animal(new Vector2d(2, 2));
         Animal animal3 = new Animal(new Vector2d(-1,8));
 
-        //when
-        boolean result1 = mapForAnimals.place(animal1);
-        boolean result2 = mapForAnimals.place(animal2);
-        boolean result3 = mapForAnimals.place(animal3);
-
         //then
-        assertTrue(result1);
-        assertFalse(result2);
-        assertTrue(result3);
+        assertDoesNotThrow(() -> mapForAnimals.place(animal1));
+        assertThrows(IncorrectPositionException.class, () -> mapForAnimals.place(animal2));
+        assertDoesNotThrow(() -> mapForAnimals.place(animal3));
     }
 
     @Test
@@ -58,9 +54,26 @@ class GrassFieldTest {
         Animal animal2 = new Animal(position2);
         Animal animal3 = new Animal(position3);
 
-        mapForAnimals.place(animal1);
-        mapForAnimals.place(animal2);
-        mapForAnimals.place(animal3);
+        try {
+            mapForAnimals.place(animal1);
+        }
+        catch(IncorrectPositionException e){
+            fail("Exception: " + e.getMessage());
+        }
+
+        try {
+            mapForAnimals.place(animal2);
+        }
+        catch (IncorrectPositionException e){
+            fail("Exception: " + e.getMessage());
+        }
+
+        try {
+            mapForAnimals.place(animal3);
+        }
+        catch (IncorrectPositionException e){
+            fail("Exception: " + e.getMessage());
+        }
 
         //when
         mapForAnimals.move(animal1, MoveDirection.RIGHT);
@@ -149,7 +162,12 @@ class GrassFieldTest {
         Vector2d position2 = new Vector2d(2,2);
 
         Animal animal1 = new Animal(position1);
-        mapForAnimals.place(animal1);
+        try {
+            mapForAnimals.place(animal1);
+        }
+        catch(IncorrectPositionException e) {
+            fail("Exception: " + e.getMessage());
+        }
 
         //when
         boolean canMoveToEmptyPosition = mapForAnimals.canMoveTo(position2);

@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.IncorrectPositionException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,8 +19,12 @@ public class RectangularMapTest {
         Vector2d position6 = new Vector2d(1,2);
 
         Animal animal1 = new Animal(position6);
-
-        mapForAnimals.place(animal1);
+        try {
+            mapForAnimals.place(animal1);
+        }
+        catch(IncorrectPositionException e){
+            fail("Exception: " + e.getMessage());
+        }
         //when
 
         //then
@@ -44,9 +49,26 @@ public class RectangularMapTest {
         Animal animal2 = new Animal(position2);
         Animal animal3 = new Animal(position3);
 
-        mapForAnimals.place(animal1);
-        mapForAnimals.place(animal2);
-        mapForAnimals.place(animal3);
+        try {
+            mapForAnimals.place(animal1);
+        }
+        catch(IncorrectPositionException e){
+            fail("Exception: " + e.getMessage());
+        }
+
+        try {
+            mapForAnimals.place(animal2);
+        }
+        catch(IncorrectPositionException e) {
+            fail("Exception: " + e.getMessage());
+        }
+
+        try {
+            mapForAnimals.place(animal3);
+        }
+        catch(IncorrectPositionException e) {
+            fail("Exception: " + e.getMessage());
+        }
 
         //when
         mapForAnimals.move(animal1, MoveDirection.RIGHT);
@@ -90,22 +112,40 @@ public class RectangularMapTest {
         Animal animal9 = new Animal(position9);
         Animal animal10 = new Animal(position10);
 
-        mapForAnimals.place(animal8);
-        mapForAnimals.place(animal9);
-        mapForAnimals.place(animal10);
+
+        try {
+            mapForAnimals.place(animal8);
+        }
+        catch(IncorrectPositionException e) {
+            fail("Exception: " + e.getMessage());
+        }
+
+        try {
+            mapForAnimals.place(animal9);
+        }
+        catch(IncorrectPositionException e) {
+            fail("Exception: " + e.getMessage());
+        }
+
+        try {
+            mapForAnimals.place(animal10);
+        }
+        catch(IncorrectPositionException e) {
+            fail("Exception: " + e.getMessage());
+        }
 
         //then
-        assertTrue(mapForAnimals.place(animal1));
-        assertFalse(mapForAnimals.place(animal2));
-        assertTrue(mapForAnimals.place(animal3));
-        assertTrue(mapForAnimals.place(animal4));
-        assertFalse(mapForAnimals.place(animal5));
-        assertFalse(mapForAnimals.place(animal6));
-        assertFalse(mapForAnimals.place(animal7));
+        assertDoesNotThrow(() -> mapForAnimals.place(animal1));
+        assertThrows(IncorrectPositionException.class, () -> mapForAnimals.place(animal2));
+        assertDoesNotThrow(() -> mapForAnimals.place(animal3));
+        assertDoesNotThrow(() -> mapForAnimals.place(animal4));
+        assertThrows(IncorrectPositionException.class, () -> mapForAnimals.place(animal5));
+        assertThrows(IncorrectPositionException.class, () -> mapForAnimals.place(animal6));
+        assertThrows(IncorrectPositionException.class, () -> mapForAnimals.place(animal7));
 
 
-        assertFalse(mapForAnimals.place(animal8));
-        assertFalse(mapForAnimals.place(animal9));
+        assertThrows(IncorrectPositionException.class, () -> mapForAnimals.place(animal8));
+        assertThrows(IncorrectPositionException.class, () -> mapForAnimals.place(animal9));
     }
 
     @Test
@@ -118,7 +158,12 @@ public class RectangularMapTest {
         Animal animal1 = new Animal(position1);
 
         //when
-        mapForAnimals.place(animal1);
+        try {
+            mapForAnimals.place(animal1);
+        }
+        catch(IncorrectPositionException e){
+            fail("Exception: " + e.getMessage());
+        }
 
         //then
         assertTrue(mapForAnimals.isOccupied(position1));
@@ -136,7 +181,12 @@ public class RectangularMapTest {
         Animal animal1 = new Animal(position1);
 
         //when
-        mapForAnimals.place(animal1);
+        try {
+            mapForAnimals.place(animal1);
+        }
+        catch (IncorrectPositionException e){
+            fail("Exception: " + e.getMessage());
+        }
 
         //then
         assertEquals(animal1,mapForAnimals.objectAt(position1));
