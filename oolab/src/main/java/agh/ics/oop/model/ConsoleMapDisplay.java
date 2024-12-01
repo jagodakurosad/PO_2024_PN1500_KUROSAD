@@ -8,6 +8,7 @@ public class ConsoleMapDisplay implements MapChangeListener {
         System.out.println(message);
         System.out.println(worldMap);
         System.out.println("Liczba aktalizacji: " + numberOfEvents);
+        System.out.println("Zmiany dotyczą mapy: " + worldMap.getMapUUID());
 
     }
 }
