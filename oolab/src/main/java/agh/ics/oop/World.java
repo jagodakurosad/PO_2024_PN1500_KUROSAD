@@ -3,6 +3,7 @@ package agh.ics.oop;
 import agh.ics.oop.model.*;
 import agh.ics.oop.model.util.RandomPositionGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.ConsoleHandler;
 
@@ -23,19 +24,30 @@ public class World {
 //    }
     public static void main(String[] args) {
 
-        GrassField grassMap = new GrassField(10);
-        RectangularMap rectangularMap = new RectangularMap(5,5);
-        grassMap.addListener(new ConsoleMapDisplay());
-        rectangularMap.addListener(new ConsoleMapDisplay());
+        //GrassField grassMap = new GrassField(10);
+//        RectangularMap rectangularMap = new RectangularMap(5,5);
+//        grassMap.addListener(new ConsoleMapDisplay());
+//        rectangularMap.addListener(new ConsoleMapDisplay());
 
 
 
         try {
             List<MoveDirection> directions = OptionsParser.parse(new String[]{"f", "b", "r", "l", "f", "f", "r", "r", "f", "f", "f", "f", "f", "f", "f", "f"});
             List<Vector2d> positions = List.of(new Vector2d(2, 2), new Vector2d(3, 4));
-            Simulation simulation1 = new Simulation(grassMap, positions, directions);
-            Simulation simulation2 = new Simulation(rectangularMap, positions, directions);
-            SimulationEngine simulationEngine = new SimulationEngine(List.of(simulation1,simulation2));
+            List<Simulation> simulations = new ArrayList<>();
+            ConsoleMapDisplay mapDisplay = new ConsoleMapDisplay();
+
+            for(int i=0; i < 400; i++){
+                GrassField grassMap = new GrassField(5);
+                grassMap.addListener(mapDisplay);
+                simulations.add(new Simulation(grassMap,positions,directions));
+            }
+            for(int i=0; i < 600; i++){
+                RectangularMap rectangularMap = new RectangularMap(4,4);
+                rectangularMap.addListener(mapDisplay);
+                simulations.add(new Simulation(rectangularMap,positions,directions));
+            }
+            SimulationEngine simulationEngine = new SimulationEngine(simulations);
 
             simulationEngine.runAsync();
             //simulationEngine.runSync();
