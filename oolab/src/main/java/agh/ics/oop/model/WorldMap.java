@@ -3,7 +3,7 @@ package agh.ics.oop.model;
 import agh.ics.oop.model.util.IncorrectPositionException;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.UUID;
 
 /**
  * Assumes that Vector2d and MoveDirection classes are defined.
@@ -44,4 +44,6 @@ public interface WorldMap extends MoveValidator {
     WorldElement objectAt(Vector2d position);
 
     Collection<WorldElement> getElements();
+
+    UUID getMapUUID();
 }
