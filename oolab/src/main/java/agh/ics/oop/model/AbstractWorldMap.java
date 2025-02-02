@@ -57,7 +57,7 @@ public abstract class AbstractWorldMap implements WorldMap{
             Vector2d newPosition = animal.getPositionOnMap();
             animals.remove(currentPosition);
             animals.put(newPosition, animal);
-            mapChangedNotification("Zwierzak ruszył się z pozycji: " + currentPosition +" na pozycję: " + newPosition );
+            mapChangedNotification("Zwierzak ruszyl sie z pozycji: " + currentPosition +" na pozycje: " + newPosition );
     }
 
     @Override

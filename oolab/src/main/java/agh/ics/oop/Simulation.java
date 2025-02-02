@@ -33,14 +33,18 @@ public class Simulation implements Runnable{
         int numberOfAnimals = myAnimals.size();
         int numberOfDirections = myDirections.size();
 
-        for (int i = 0; i < numberOfDirections; i++) {
+        try {
+            for (int i = 0; i < numberOfDirections; i++) {
 
-            int numberOfCurrentAnimal = i % numberOfAnimals;
-            Animal myCurrentAnimal = myAnimals.get(numberOfCurrentAnimal);
+                int numberOfCurrentAnimal = i % numberOfAnimals;
+                Animal myCurrentAnimal = myAnimals.get(numberOfCurrentAnimal);
 
-            map.move(myCurrentAnimal, myDirections.get(i));
-            //System.out.println(map);
+                map.move(myCurrentAnimal, myDirections.get(i));
+                Thread.sleep(500);
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
-
+            //System.out.println(map);
     }
 }

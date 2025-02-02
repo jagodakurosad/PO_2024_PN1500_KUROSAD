@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.Boundary;
 import agh.ics.oop.model.util.IncorrectPositionException;
 
 import java.util.Collection;
@@ -46,4 +47,6 @@ public interface WorldMap extends MoveValidator {
     Collection<WorldElement> getElements();
 
     UUID getMapUUID();
+
+    Boundary getCurrentBounds();
 }
